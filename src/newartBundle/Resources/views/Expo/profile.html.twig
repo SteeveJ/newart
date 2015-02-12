@@ -1,0 +1,212 @@
+{# header #}
+{{ include("newartBundle:Expo:header.html.twig") }}
+
+
+{# Nav-Left #}
+{{ include("newartBundle:Expo:nav.html.twig") }}
+{# END Nav-Left #}
+
+<div class="container-fluid profile">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-11 col-md-offset-1">
+                {# artist    image #}
+                <img src="{{ asset('bundles/admin/images/img-profil.jpg') }}" alt="André Le Corre" class="img-circle img-responsive center-block">
+                {# artist name #}
+                <h1 class="name text-center"> André Le Corre </h1>
+                <h2 class="surname text-center">El Cor</h2>
+                <div class="contactProfile">
+                    {# location #}
+                    <p class="text-center"><span class="fa fa-map-marker"></span> PARIS, FRANCE</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-11 col-md-offset-1">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-4 col-lg-7 col-lg-offset-5 col-sm-8 col-sm-offset-4">
+                            <ul class="list-inline social-buttons text-center col-lg-1 col-md-1 col-sm-2 col-xs-4">
+                                <li><a href="#" target="_blank"><span class="fa fa-twitter"></span></a>
+                                </li>
+                            </ul>
+                            <ul class="list-inline social-buttons text-center col-lg-1 col-md-1 col-sm-2 col-xs-4">
+                                <li><a href="#" target="_blank"><span class="fa fa-facebook"></span></a>
+                                </li>
+                            </ul>
+                            <ul class="list-inline social-buttons text-center col-lg-1 col-md-1 col-sm-2 col-xs-4">
+                                <li><a href="#" target="_blank"><span class="fa fa-instagram"></span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<div class="container col-md-11 col-md-offset-1">
+    {# Section Biography #}
+    <section id="biography" class="containerProfile">
+
+        <h1 class="text-center"><span class="titlestyle">{{ 'Biographie'|upper }}</span></h1>
+        <div class="barre center-block"></div>
+
+        <p class="left">Création et imaginaire nourrissent sa création depuis l’enfance. Dessin, peinture
+            puis photographie lui permette de la cultiver. Un temps tenté par les beaux arts, il choisit une formation
+            universitaire naturaliste puis débutera sa vie professionnelle comme photographe. Il reprendra fin des années
+            90 des études d’art plastique universitaires qui orienteront sa pratique.
+        </p>
+        <p class="left">En 1983, ses premières grandes exposition le plonge au coté de grands noms au journée internationales
+            de la photographie et de l’audiovisuel de Montpellier en tant que plasticien photographe mélangeant les médiums.
+        </p>
+        <p class="left">Peinture, photographie , mélange des deux : trois pratiques qui animeront ses toutes ses expositions.
+        </p>
+        <p class="left">Sa série CORPUS 2013 emprunté au latin corpus (« corps »corpus /k??.pys/ masculin Recueil de pièces,
+            de documents concernant une même matière) lui permet de rassembler ses diverses écritures au sein d'une même peinture
+            et d'en explorer l'essence pour en donner une vie organique et onirique .Ce qui relie le corps au monde dans tous les
+            cycles du vivant pour des propositions aux multiples portes d'entrée, propices à des visions au confins de l'être.
+        </p>
+        <p class="left">Il reprends le mélange des médiums avec numérique, photographie et peinture dans les derniers travaux.
+        </p>
+    </section>
+</div>
+{# section last work #}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-11 col-md-offset-1">
+            <div id="lastwork" class="containerProfile">
+                <h5 class="profileTitleOeuvre">{{ 'dernieres oeuvres ' | upper }}</h5>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <img src="{{ asset('bundles/admin/images/gallery-profile/image-1.jpg') }}" alt="" class="img-responsive img-recent"/>
+                    </div>
+                    <div class="col-md-3">
+                        <img src="{{ asset('bundles/admin/images/gallery-profile/image-2.jpg') }}" alt="" class="img-responsive img-recent"/>
+                    </div>
+                    <div class="col-md-3">
+                        <img src="{{ asset('bundles/admin/images/gallery-profile/image-3.jpg') }}" alt="" class="img-responsive img-recent"/>
+                    </div>
+                    <div class="col-md-3">
+                        <img src="{{ asset('bundles/admin/images/gallery-profile/image-4.jpg') }}" alt="" class="img-responsive img-recent"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-11 col-md-offset-1">
+            <div class="containerProfile">
+                <div class="borderactus"></div>
+                <h5 class="actusTitle">{{ 'Actualités :' | upper }}</h5>
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <p class="actualityText dateProfile">10.10.2013</p>
+                        <h5 class="subtitleTextActuality">&quot; De l'amour dans la peinture. &quot;</h5>
+                        <p class="actualityText">
+                            Participe à" De l’Amour dans la Peinture" — Les Quatre Saisons de l’Art - Automne 2013 Du lundi 23 septembre au lundi 21 octobre 2013 Vernissage samedi 21 septembre 2013 à 17h30
+                        </p>
+                        <a href="#" class="actualityLien">ttp://www.artcontemporain-languedocroussillon.fr/evenement-258.html</a>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="actualityText dateProfile">13.03.2013</p>
+                        <h5 class="subtitleTextActuality">Démarche artistique</h5>
+                        <p class="actualityText">
+                            Créateur d'images où s'entremêlent mes visions photographiques, picturales dans toutes les possibilités qu'offre la digitalisation, je laisse dans ma pratique de la peinture la libre contrainte de sa seule
+                            occurrence.
+                        </p>
+                    </div>
+                </div>
+                <div class="borderactus"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-11 col-md-offset-1">
+            <div class="containerProfile portofolio">
+                <h1 class="text-center">{{ 'El Cor\n'|nl2br }}<span class="titlestyle"> {{ 'portofolio'|upper }}</span></h1>
+                <div class="barre center-block"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="grilleportofolio">
+            <div id="grid-gallery" class="grid-gallery">
+                <section class="grid-wrap">
+                    <ul class="grid">
+                        <li class="grid-sizer"></li><!-- for Masonry column width -->
+                        <li>
+                            <figure>
+                                <img src="{{ asset('bundles/admin/images/gallery-profile/image-1.jpg') }}" alt="" class="image-portofolio img-responsive">
+                            </figure>
+                        </li>
+                        <li>
+                            <figure>
+                                <img src="{{ asset('bundles/admin/images/gallery-profile/image-2.jpg') }}" alt="" class="image-portofolio img-responsive">
+                            </figure>
+                        </li>
+                        <li>
+                            <figure>
+                                <img src="{{ asset('bundles/admin/images/gallery-profile/image-3.jpg') }}" alt="" class="image-portofolio img-responsive">
+                            </figure>
+                        </li>
+                    </ul>
+                </section><!-- // grid-wrap -->
+                <section class="slideshow">
+                    <ul>
+                        <li>
+                            <figure>
+                                <img src="{{ asset('bundles/admin/images/gallery-profile/image-1.jpg') }}" alt="" class="image-portofolio img-responsive">
+                            </figure>
+                        </li>
+                        <li>
+                            <figure>
+                                <img src="{{ asset('bundles/admin/images/gallery-profile/image-2.jpg') }}" alt="" class="image-portofolio img-responsive">
+                            </figure>
+                        </li>
+                        <li>
+                            <figure>
+                                <img src="{{ asset('bundles/admin/images/gallery-profile/image-2.jpg') }}" alt="" class="image-portofolio img-responsive">
+                            </figure>
+                        </li>
+
+                    </ul>
+                    <nav>
+                        <span class="fa-backward icon nav-prev"></span>
+                        <span class="icon nav-next"></span>
+                        <span class="icon nav-close"></span>
+                    </nav>
+                    <div class="info-keys icon">Navigation avec les touches de direction</div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-11 col-md-offset-1 newsbutton">
+            <p class="text-center"><a href="#"><button type="button" class="btn btn-default buttonred">Charger plus d'oeuvres</button></a><p>
+        </div>
+    </div>
+</div>
+
+{# footer #}
+{{ include("newartBundle:Expo:footer.html.twig") }}
