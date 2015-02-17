@@ -8,10 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class ExpoController extends Controller
 {
-    public function indexAction()
-    {
-        return $this->render('newartBundle:Expo:index.html.twig');
-    }
+
 
     public function profilAction()
     {

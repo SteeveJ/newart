@@ -1,6 +1,3 @@
-Newart:
-    path:     /
-    defaults: { _controller: newartBundle:Expo:index }
 
 nae_plateform_profil:
     path:     /profil/
