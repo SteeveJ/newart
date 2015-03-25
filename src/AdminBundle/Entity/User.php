@@ -2,94 +2,253 @@
 
 namespace AdminBundle\Entity;
 
+use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+
 
 /**
- * User
+ * FosUser
  *
- * @ORM\Table(name="user", indexes={@ORM\Index(name="user_FI_1", columns={"account_id"})})
+ * @ORM\Table(name="users")
  * @ORM\Entity
+ *
+ * @Vich\Uploadable
  */
-class User
+class User extends BaseUser implements EncoderAwareInterface
 {
+    use ORMBehaviors\Timestampable\Timestampable;
+
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="account_id", type="integer", nullable=false)
-     */
-    private $accountId;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="cover_picture_id", type="integer", nullable=true)
-     */
-    private $coverPictureId;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="first_name", type="string", length=31, nullable=true)
-     */
-    private $firstName;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="last_name", type="string", length=31, nullable=true)
-     */
-    private $lastName;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="birthday", type="date", nullable=true)
-     */
-    private $birthday;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="category", type="string", length=31, nullable=true)
-     */
-    private $category;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="biography", type="text", nullable=true)
+     *
      */
-    private $biography;
+    protected $biography;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="phone", type="string", length=15, nullable=true)
+     * @ORM\Column(name="blaze", type="string", length=80, nullable=true)
+     *
      */
-    private $phone;
+    protected $blaze;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="country", type="string", length=2, nullable=true)
+     * @ORM\Column(name="twitter", type="string", length=255, nullable=true)
+     *
      */
-    private $country;
+    protected $twitter;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="featuring_date", type="datetime", nullable=true)
+     * @ORM\Column(name="facebook", type="string", length=255, nullable=true)
+     *
      */
-    private $featuringDate;
+    protected $facebook;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="instagram", type="string", length=255, nullable=true)
+     *
+     */
+    protected $instagram;
+
+    /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @Vich\UploadableField(mapping="user_image", fileNameProperty="imageName")
+     *
+     * @var File $imageFile
+     */
+    protected $imageFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, name="image_name")
+     *
+     * @var string $imageName
+     */
+    protected $imageName;
+
+    /**
+     * @return string
+     */
+    public function getBlaze()
+    {
+        return $this->blaze;
+    }
+
+    /**
+     * @param string $blaze
+     */
+    public function setBlaze($blaze)
+    {
+        $this->blaze = $blaze;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTwitter()
+    {
+        return $this->twitter;
+    }
+
+    /**
+     * @param string $twitter
+     */
+    public function setTwitter($twitter)
+    {
+        $this->twitter = $twitter;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFacebook()
+    {
+        return $this->facebook;
+    }
+
+    /**
+     * @param string $facebook
+     */
+    public function setFacebook($facebook)
+    {
+        $this->facebook = $facebook;
+    }
+
+    /**
+     * @return string
+     */
+    public function getInstagram()
+    {
+        return $this->instagram;
+    }
+
+    /**
+     * @param string $instagram
+     */
+    public function setInstagram($instagram)
+    {
+        $this->instagram = $instagram;
+    }
 
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="legacy_encoder", type="boolean")
+     */
+    protected $legacyEncoder;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->legacyEncoder = false;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBiography()
+    {
+        return $this->biography;
+    }
+
+    /**
+     * @param string $biography
+     */
+    public function setBiography($biography)
+    {
+        $this->biography = $biography;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isLegacyEncoder()
+    {
+        return $this->legacyEncoder;
+    }
+
+    /**
+     * @param boolean $legacyEncoder
+     */
+    public function setLegacyEncoder($legacyEncoder)
+    {
+        $this->legacyEncoder = $legacyEncoder;
+    }
+
+    public function getEncoderName() {
+        return true === $this->legacyEncoder ? 'legacy' : 'default';
+    }
+
+    public function setSalt($salt) {
+        $this->salt = $salt;
+    }
+
+    /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the  update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
+     */
+    public function setImageFile(File $image = null)
+    {
+        $this->imageFile = $image;
+
+        if ($image) {
+            $this->updateTimestamps();
+
+        }
+    }
+
+    /**
+     * @return File
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param string $imageName
+     */
+    public function setImageName($imageName)
+    {
+        $this->imageName = $imageName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageName()
+    {
+        return $this->imageName;
+    }
 }

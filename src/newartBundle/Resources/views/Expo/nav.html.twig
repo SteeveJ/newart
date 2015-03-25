@@ -1,9 +1,10 @@
+{#{{ dump(app) }}#}
 <header>
     {# Nav-left desktop #}
     <div class="menu menu-desktop hidden-xs">
         <div class="box-nav-top">
             <a class="ico-nav-phone" ><img class="ico-nav" src="{{ asset('bundles/admin/images/icons/menu.png') }}"></a>
-            <img class="ico-nav nav-logo" src="{{ asset('bundles/admin/images/logo.png') }}">
+            <a href="{{ path('newart') }}"><img class="ico-nav nav-logo" src="{{ asset('bundles/admin/images/logo.png') }}"></a>
         </div>
         <ul class="nav-left">
             <div id="box-nav">
@@ -17,11 +18,14 @@
                         RECHERCHE
                     </a>
                 </li>
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                 <li id="profil">
-                    <a href="{{ path('nae_plateform_profil') }}">
+
+                    <a href="{{ path('nae_plateform_profil', { 'id': app.user.id }) }}">
                         MON PROFIL
                     </a>
                 </li>
+                {% endif %}
                 <li id="books">
                     <a href="{{ path('nae_plateform_books') }}">
                         LISTE DES BOOKS
@@ -68,11 +72,13 @@
                             RECHERCHE
                         </a>
                     </li>
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                     <li id="profil">
-                        <a>
+                        <a href="{{ path('nae_plateform_profil', { 'id': app.user.id }) }}">
                             MON PROFIL
                         </a>
                     </li>
+                    {% endif %}
                     <li id="books">
                         <a>
                             LISTE DES BOOKS

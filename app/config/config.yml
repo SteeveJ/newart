@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    #- { resource: ../../vendor/knplabs/doctrine-behaviors/config/orm-services.yml }
 
 framework:
     translator: ~
@@ -28,6 +29,8 @@ framework:
 
 # Twig Configuration
 twig:
+    form:
+        resources: ['bootstrap_3_layout.html.twig']
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
 
@@ -77,18 +80,43 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: AdminBundle\Entity\User
+    profile:
+        form:
+            type: admin_user_profile
 
 # Hashing Algorithm Sf_guard
 fos_advanced_encoder:
-  encoders:
-    # default values for FOSUserBundle (Symfony2)
-    # see http://symfony.com/doc/current/reference/configuration/security.html
-    default:
-      algorithm: sha512
-      iterations: 5000
-      encode_as_base64: true
-    # legacy encoder used by sfGuard (symfony 1)
-    legacy:
-      algorithm: sha1
-      iterations: 1
-      encode_as_base64: false
+    encoders:
+        # default values for FOSUserBundle (Symfony2)
+        # see http://symfony.com/doc/current/reference/configuration/security.html
+        default:
+            algorithm: sha512
+            iterations: 5000
+            encode_as_base64: true
+        # legacy encoder used by sfGuard (symfony 1)
+        legacy:
+            algorithm: sha1
+            iterations: 1
+            encode_as_base64: false
+
+parameters:
+    security.encoder.digest.class: AdminBundle\Security\LegacyMessageDigestPasswordEncoder
+
+knp_gaufrette:
+    stream_wrapper: ~
+    adapters:
+        user_adapter:
+            local:
+                directory: %kernel.root_dir%/../web/images/users
+                create:     true
+    filesystems:
+        user_image_fs:
+            adapter:    user_adapter
+
+vich_uploader:
+    db_driver: orm
+    storage:   knp_gaufrette
+    mappings:
+        user_image:
+            uri_prefix:         /images/users
+            upload_destination: user_image_fs

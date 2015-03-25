@@ -9,12 +9,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class ExpoController extends Controller
 {
 
-
-    public function profilAction()
-    {
-        return $this->render('newartBundle:Expo:profile.html.twig');
-    }
-
     public function booksAction()
     {
         return $this->render('newartBundle:Expo:books.html.twig');

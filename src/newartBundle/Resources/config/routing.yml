@@ -1,7 +1,4 @@
 
-nae_plateform_profil:
-    path:     /profil/
-    defaults: { _controller: newartBundle:Expo:profil }
 
 nae_plateform_books:
     path:     /books/

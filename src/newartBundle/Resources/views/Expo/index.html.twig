@@ -2,14 +2,16 @@
 {{ include("newartBundle:Expo:header.html.twig") }}
 {# Header : Nav / Slider #}
 {# Nav-Left #}
-<body>
+
 {{ include("newartBundle:Expo:nav.html.twig") }}
     {# END Nav-Left #}
     {# Slider #}
     <div class="logo"></div>
-
-    <div class="inscription"><button class="md-trigger btn btn-default" data-modal="modal-1">{{ 'Se connecter / S\'inscrire' }}</button></div>
-
+{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+    <div class="inscription"><a href="{{ path('fos_user_profile_show') }}">Profile</a></div>
+{% else %}
+    <div class="inscription"><a href="{{ path('fos_user_security_login') }}">Se connecter</a> / <a href="{{ path('fos_user_registration_register') }}">S'inscrire</a></div>
+{% endif %}
 <div class="col-md-11 col-md-offset-1 slider">
         <div id="myCarousel" class="carousel slide" data-interval="3000" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -395,5 +397,5 @@
             });
         });
     </script>
-</body>
+
 {{ include("newartBundle:Expo:footer.html.twig") }}

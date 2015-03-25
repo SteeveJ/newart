@@ -19,11 +19,14 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new AdminBundle\AdminBundle(),
             new newartBundle\newartBundle(),
+            new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
 
             new FOS\UserBundle\FOSUserBundle(),
 
             // FOSAdvanceEncoderBundle
             new FOS\AdvancedEncoderBundle\FOSAdvancedEncoderBundle(),
+            //vich Bundle
+            new Vich\UploaderBundle\VichUploaderBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

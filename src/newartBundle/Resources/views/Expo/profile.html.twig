@@ -13,8 +13,10 @@
                 {# artist    image #}
                 <img src="{{ asset('bundles/admin/images/img-profil.jpg') }}" alt="André Le Corre" class="img-circle img-responsive center-block">
                 {# artist name #}
-                <h1 class="name text-center"> André Le Corre </h1>
-                <h2 class="surname text-center">El Cor</h2>
+                <h1 class="name text-center"> {{ user.username }} </h1>
+                {% if user.blaze != null %}
+                    <h2 class="surname text-center">{{ user.blaze }}</h2>
+                {% endif %}
                 <div class="contactProfile">
                     {# location #}
                     <p class="text-center"><span class="fa fa-map-marker"></span> PARIS, FRANCE</p>
@@ -25,18 +27,24 @@
                 <div class="col-md-11 col-md-offset-1">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-4 col-lg-7 col-lg-offset-5 col-sm-8 col-sm-offset-4">
-                            <ul class="list-inline social-buttons text-center col-lg-1 col-md-1 col-sm-2 col-xs-4">
-                                <li><a href="#" target="_blank"><span class="fa fa-twitter"></span></a>
-                                </li>
-                            </ul>
-                            <ul class="list-inline social-buttons text-center col-lg-1 col-md-1 col-sm-2 col-xs-4">
-                                <li><a href="#" target="_blank"><span class="fa fa-facebook"></span></a>
-                                </li>
-                            </ul>
-                            <ul class="list-inline social-buttons text-center col-lg-1 col-md-1 col-sm-2 col-xs-4">
-                                <li><a href="#" target="_blank"><span class="fa fa-instagram"></span></a>
-                                </li>
-                            </ul>
+                            {% if user.twitter != null %}
+                                <ul class="list-inline social-buttons text-center col-lg-1 col-md-1 col-sm-2 col-xs-4">
+                                    <li><a href="{{ user.twitter }}" target="_blank"><span class="fa fa-twitter"></span></a>
+                                    </li>
+                                </ul>
+                            {% endif %}
+                            {% if user.facebook != null %}
+                                <ul class="list-inline social-buttons text-center col-lg-1 col-md-1 col-sm-2 col-xs-4">
+                                    <li><a href="{{ user.facebook }}" target="_blank"><span class="fa fa-facebook"></span></a>
+                                    </li>
+                                </ul>
+                            {% endif %}
+                            {% if user.instagram != null %}
+                                <ul class="list-inline social-buttons text-center col-lg-1 col-md-1 col-sm-2 col-xs-4">
+                                    <li><a href="{{ user.instagram }}" target="_blank"><span class="fa fa-instagram"></span></a>
+                                    </li>
+                                </ul>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -53,24 +61,10 @@
 
         <h1 class="text-center"><span class="titlestyle">{{ 'Biographie'|upper }}</span></h1>
         <div class="barre center-block"></div>
+        <div class="left">
+            {{ user.biography|raw }}
+        </div>
 
-        <p class="left">Création et imaginaire nourrissent sa création depuis l’enfance. Dessin, peinture
-            puis photographie lui permette de la cultiver. Un temps tenté par les beaux arts, il choisit une formation
-            universitaire naturaliste puis débutera sa vie professionnelle comme photographe. Il reprendra fin des années
-            90 des études d’art plastique universitaires qui orienteront sa pratique.
-        </p>
-        <p class="left">En 1983, ses premières grandes exposition le plonge au coté de grands noms au journée internationales
-            de la photographie et de l’audiovisuel de Montpellier en tant que plasticien photographe mélangeant les médiums.
-        </p>
-        <p class="left">Peinture, photographie , mélange des deux : trois pratiques qui animeront ses toutes ses expositions.
-        </p>
-        <p class="left">Sa série CORPUS 2013 emprunté au latin corpus (« corps »corpus /k??.pys/ masculin Recueil de pièces,
-            de documents concernant une même matière) lui permet de rassembler ses diverses écritures au sein d'une même peinture
-            et d'en explorer l'essence pour en donner une vie organique et onirique .Ce qui relie le corps au monde dans tous les
-            cycles du vivant pour des propositions aux multiples portes d'entrée, propices à des visions au confins de l'être.
-        </p>
-        <p class="left">Il reprends le mélange des médiums avec numérique, photographie et peinture dans les derniers travaux.
-        </p>
     </section>
 </div>
 {# section last work #}
@@ -106,23 +100,17 @@
                 <div class="borderactus"></div>
                 <h5 class="actusTitle">{{ 'Actualités :' | upper }}</h5>
                 <div class="row">
+                    {% for post in posts|slice(0, 2)  %}
+                    <div class="col-md-6">
+                        <p class="actualityText dateProfile">{{ post.updatedAt|date('d.m.Y') }}</p>
+                        <h5 class="subtitleTextActuality">&quot; {{ post.title }} &quot;</h5>
+                        <div class="actualityText">
+                            {{ post.text|truncate(50)|raw }}
+                        </div>
+                        <a class="actualityLien" href="{{ path('post_show', { 'id': post.id }) }}">Voir +</a>
+                    </div>
+                    {% endfor %}
 
-                    <div class="col-md-6">
-                        <p class="actualityText dateProfile">10.10.2013</p>
-                        <h5 class="subtitleTextActuality">&quot; De l'amour dans la peinture. &quot;</h5>
-                        <p class="actualityText">
-                            Participe à" De l’Amour dans la Peinture" — Les Quatre Saisons de l’Art - Automne 2013 Du lundi 23 septembre au lundi 21 octobre 2013 Vernissage samedi 21 septembre 2013 à 17h30
-                        </p>
-                        <a href="#" class="actualityLien">ttp://www.artcontemporain-languedocroussillon.fr/evenement-258.html</a>
-                    </div>
-                    <div class="col-md-6">
-                        <p class="actualityText dateProfile">13.03.2013</p>
-                        <h5 class="subtitleTextActuality">Démarche artistique</h5>
-                        <p class="actualityText">
-                            Créateur d'images où s'entremêlent mes visions photographiques, picturales dans toutes les possibilités qu'offre la digitalisation, je laisse dans ma pratique de la peinture la libre contrainte de sa seule
-                            occurrence.
-                        </p>
-                    </div>
                 </div>
                 <div class="borderactus"></div>
             </div>
