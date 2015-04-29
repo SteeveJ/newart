@@ -7,7 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 
 /**
@@ -20,8 +19,6 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  */
 class User extends BaseUser implements EncoderAwareInterface
 {
-    use ORMBehaviors\Timestampable\Timestampable;
-
     /**
      * @var integer
      *
@@ -40,38 +37,6 @@ class User extends BaseUser implements EncoderAwareInterface
     protected $biography;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="blaze", type="string", length=80, nullable=true)
-     *
-     */
-    protected $blaze;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="twitter", type="string", length=255, nullable=true)
-     *
-     */
-    protected $twitter;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="facebook", type="string", length=255, nullable=true)
-     *
-     */
-    protected $facebook;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="instagram", type="string", length=255, nullable=true)
-     *
-     */
-    protected $instagram;
-
-    /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
      * @Vich\UploadableField(mapping="user_image", fileNameProperty="imageName")
@@ -88,68 +53,11 @@ class User extends BaseUser implements EncoderAwareInterface
     protected $imageName;
 
     /**
-     * @return string
+     * @ORM\Column(type="datetime")
+     *
+     * @var \DateTime $updatedAt
      */
-    public function getBlaze()
-    {
-        return $this->blaze;
-    }
-
-    /**
-     * @param string $blaze
-     */
-    public function setBlaze($blaze)
-    {
-        $this->blaze = $blaze;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTwitter()
-    {
-        return $this->twitter;
-    }
-
-    /**
-     * @param string $twitter
-     */
-    public function setTwitter($twitter)
-    {
-        $this->twitter = $twitter;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFacebook()
-    {
-        return $this->facebook;
-    }
-
-    /**
-     * @param string $facebook
-     */
-    public function setFacebook($facebook)
-    {
-        $this->facebook = $facebook;
-    }
-
-    /**
-     * @return string
-     */
-    public function getInstagram()
-    {
-        return $this->instagram;
-    }
-
-    /**
-     * @param string $instagram
-     */
-    public function setInstagram($instagram)
-    {
-        $this->instagram = $instagram;
-    }
+    protected $updatedAt;
 
 
     /**
@@ -169,21 +77,7 @@ class User extends BaseUser implements EncoderAwareInterface
         $this->legacyEncoder = false;
     }
 
-    /**
-     * @return string
-     */
-    public function getBiography()
-    {
-        return $this->biography;
-    }
 
-    /**
-     * @param string $biography
-     */
-    public function setBiography($biography)
-    {
-        $this->biography = $biography;
-    }
 
     /**
      * @return boolean
@@ -201,11 +95,13 @@ class User extends BaseUser implements EncoderAwareInterface
         $this->legacyEncoder = $legacyEncoder;
     }
 
-    public function getEncoderName() {
+    public function getEncoderName()
+    {
         return true === $this->legacyEncoder ? 'legacy' : 'default';
     }
 
-    public function setSalt($salt) {
+    public function setSalt($salt)
+    {
         $this->salt = $salt;
     }
 
@@ -223,8 +119,7 @@ class User extends BaseUser implements EncoderAwareInterface
         $this->imageFile = $image;
 
         if ($image) {
-            $this->updateTimestamps();
-
+            $this->updatedAt = new \DateTime('now');
         }
     }
 

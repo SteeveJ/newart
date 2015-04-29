@@ -1,8 +1,10 @@
-
+nae_plateform_books_profile:
+    path:     /books/profile/{id}
+    defaults: { _controller: newartBundle:Expo:profile }
 
 nae_plateform_books:
-    path:     /books/
-    defaults: { _controller: newartBundle:Expo:books }
+    path:     /books/{id}
+    defaults: { _controller: newartBundle:Expo:books, id: 1 }
 
 nae_plateform_expo:
     path:     /expo/

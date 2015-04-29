@@ -107,16 +107,16 @@ knp_gaufrette:
     adapters:
         user_adapter:
             local:
-                directory: %kernel.root_dir%/../web/images/users
-                create:     true
+                directory: %kernel.root_dir%/../web/upload/images/users
+                create:    true
     filesystems:
         user_image_fs:
             adapter:    user_adapter
 
 vich_uploader:
     db_driver: orm
-    storage:   knp_gaufrette
+    storage:   gaufrette
     mappings:
         user_image:
-            uri_prefix:         /images/users
+            uri_prefix:         /upload/images/users
             upload_destination: user_image_fs

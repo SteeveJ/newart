@@ -11,15 +11,15 @@
         <div class="row">
             <div class="col-md-11 col-md-offset-1">
                 {# artist    image #}
-                <img src="{{ asset('bundles/admin/images/img-profil.jpg') }}" alt="André Le Corre" class="img-circle img-responsive center-block">
+                <img src="" alt="André Le Corre" class="img-circle img-responsive center-block">
                 {# artist name #}
-                <h1 class="name text-center"> {{ user.username }} </h1>
+                <h1 class="name text-center"> {{ user.firstname }} {{ user.lastname }}</h1>
                 {% if user.blaze != null %}
                     <h2 class="surname text-center">{{ user.blaze }}</h2>
                 {% endif %}
                 <div class="contactProfile">
                     {# location #}
-                    <p class="text-center"><span class="fa fa-map-marker"></span> PARIS, FRANCE</p>
+                    <p class="text-center"><span class="fa fa-map-marker"></span>{{ user.country }}</p>
                 </div>
             </div>
 
@@ -76,16 +76,16 @@
 
                 <div class="row">
                     <div class="col-md-3">
-                        <img src="{{ asset('bundles/admin/images/gallery-profile/image-1.jpg') }}" alt="" class="img-responsive img-recent"/>
+                        <img src="" alt="" class="img-responsive img-recent"/>
                     </div>
                     <div class="col-md-3">
-                        <img src="{{ asset('bundles/admin/images/gallery-profile/image-2.jpg') }}" alt="" class="img-responsive img-recent"/>
+                        <img src="" alt="" class="img-responsive img-recent"/>
                     </div>
                     <div class="col-md-3">
-                        <img src="{{ asset('bundles/admin/images/gallery-profile/image-3.jpg') }}" alt="" class="img-responsive img-recent"/>
+                        <img src="" alt="" class="img-responsive img-recent"/>
                     </div>
                     <div class="col-md-3">
-                        <img src="{{ asset('bundles/admin/images/gallery-profile/image-4.jpg') }}" alt="" class="img-responsive img-recent"/>
+                        <img src="" alt="" class="img-responsive img-recent"/>
                     </div>
                 </div>
             </div>

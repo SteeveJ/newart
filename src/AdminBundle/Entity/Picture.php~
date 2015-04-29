@@ -280,27 +280,4 @@ class Picture
         return $this->featuringDate;
     }
     
-
-    /**
-     * Set userId
-     *
-     * @param User $userId
-     * @return Picture
-     */
-    public function setUserId(User $userId = null)
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    /**
-     * Get userId
-     *
-     * @return User
-     */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
 }

@@ -28,7 +28,6 @@ class SecurityController extends BaseController
         if (true === $security->isGranted('ROLE_USER'))
             return new RedirectResponse($this->container->get('router')->generate('newart'));
 
-
         $request = $this->container->get('request');
         /* @var $request \Symfony\Component\HttpFoundation\Request */
         $session = $request->getSession();

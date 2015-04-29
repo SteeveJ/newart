@@ -9,9 +9,38 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class ExpoController extends Controller
 {
 
-    public function booksAction()
+    public function booksAction($id)
     {
-        return $this->render('newartBundle:Expo:books.html.twig');
+        $min = 0;
+        $max = 9;
+        if($id != null){
+            if($id > 1){
+                $max = ($max * $id);
+                $min = ($max - 9);
+                $max = $max +1;
+            }
+        }
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository('AdminBundle:UserPersonalInformation')->findAll();
+
+        return $this->render('newartBundle:Expo:books.html.twig',[
+            'users' => $users,
+            'min' => $min,
+            'max' => $max,
+        ]);
+    }
+    public function profileAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('AdminBundle:UserPersonalInformation')->findOneById($id);
+
+        $em = $this->getDoctrine()->getManager();
+        $posts = $em->getRepository('AdminBundle:Post')->findby([],['updatedAt' => 'DESC']);
+
+        return $this->render('newartBundle:Expo:profile.html.twig',[
+            'user' => $user,
+            'posts' => $posts,
+        ]);
     }
 
     public function expoAction()
